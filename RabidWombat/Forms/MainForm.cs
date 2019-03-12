@@ -1,8 +1,9 @@
-﻿using System;
+﻿using RabidWombat.Models;
+using System;
 using System.IO;
 using System.Windows.Forms;
 
-namespace RabidWombat
+namespace RabidWombat.Forms
 {
     public partial class MainForm : Form
     {

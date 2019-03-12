@@ -1,4 +1,4 @@
-﻿namespace RabidWombat
+﻿namespace RabidWombat.Models
 {
     /// <summary>
     /// Represents the application configuration file.

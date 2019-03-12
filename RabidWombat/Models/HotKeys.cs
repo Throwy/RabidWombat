@@ -1,4 +1,4 @@
-﻿namespace RabidWombat
+﻿namespace RabidWombat.Models
 {
     /// <summary>
     /// Represents a container for the applications Hot Keys.

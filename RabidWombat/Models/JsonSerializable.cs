@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.IO;
 
-namespace RabidWombat
+namespace RabidWombat.Models
 {
     /// <summary>
     /// Represents an object that can be written to and read from a file as JSON.

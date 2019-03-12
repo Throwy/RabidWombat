@@ -1,4 +1,4 @@
-﻿namespace RabidWombat
+﻿namespace RabidWombat.Forms
 {
     partial class MainForm
     {
