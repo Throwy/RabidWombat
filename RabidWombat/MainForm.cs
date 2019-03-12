@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RabidWombat
@@ -21,7 +14,7 @@ namespace RabidWombat
             InitializeComponent();
 
             // get application settings
-            if(!File.Exists(CONFIGURATION_FILE_PATH))
+            if (!File.Exists(CONFIGURATION_FILE_PATH))
             {
                 new ConfigurationFile().Save(CONFIGURATION_FILE_PATH);
             }
@@ -35,7 +28,17 @@ namespace RabidWombat
 
         private void btnStopRecord_Click(object sender, EventArgs e)
         {
-            // TODO:
+            // TODO
+        }
+
+        private void btnPlayMacro_Click(object sender, EventArgs e)
+        {
+            // TODO
+        }
+
+        private void btnStopMacro_Click(object sender, EventArgs e)
+        {
+            // TODO
         }
     }
 }

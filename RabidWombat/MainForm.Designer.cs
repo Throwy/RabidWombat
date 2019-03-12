@@ -62,6 +62,7 @@
             this.btnPlayMacro.TabIndex = 2;
             this.btnPlayMacro.Text = "Play";
             this.btnPlayMacro.UseVisualStyleBackColor = true;
+            this.btnPlayMacro.Click += new System.EventHandler(this.btnPlayMacro_Click);
             // 
             // btnStopMacro
             // 
@@ -71,6 +72,7 @@
             this.btnStopMacro.TabIndex = 3;
             this.btnStopMacro.Text = "Stop Macro";
             this.btnStopMacro.UseVisualStyleBackColor = true;
+            this.btnStopMacro.Click += new System.EventHandler(this.btnStopMacro_Click);
             // 
             // MainForm
             // 
