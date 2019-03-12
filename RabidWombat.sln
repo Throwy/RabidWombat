@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabidWombat", "RabidWombat\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabidWombat.Macro", "RabidWombat.Macro\RabidWombat.Macro.csproj", "{E83FF950-9DDF-42BE-BC36-605BD4B85D4A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabidWombat.Hooks", "RabidWombat.Hooks\RabidWombat.Hooks.csproj", "{878352DC-E3FB-421B-802F-3F9B700A0A65}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{E83FF950-9DDF-42BE-BC36-605BD4B85D4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E83FF950-9DDF-42BE-BC36-605BD4B85D4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E83FF950-9DDF-42BE-BC36-605BD4B85D4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{878352DC-E3FB-421B-802F-3F9B700A0A65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{878352DC-E3FB-421B-802F-3F9B700A0A65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{878352DC-E3FB-421B-802F-3F9B700A0A65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{878352DC-E3FB-421B-802F-3F9B700A0A65}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
