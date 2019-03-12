@@ -1,4 +1,4 @@
-﻿using System.Drawing;
+﻿using System.Windows;
 using System.Windows.Forms;
 
 namespace RabidWombat.Hooks.EventHandlers
@@ -8,7 +8,7 @@ namespace RabidWombat.Hooks.EventHandlers
     /// <summary>
     /// Represents a set of event arguments passed into the handler for a global mouse event.
     /// </summary>
-    public class GlobalMouseEventHandlerArgs
+    public class GlobalMouseEventHandlerArgs : HandleableEventArgs
     {
         /// <summary>
         /// The x- and y-coordinates of the cursor, in screen coordinates.
