@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Drawing;
 using System.Text;
+using System.Windows;
 using System.Windows.Forms;
 using System.Xml;
 
@@ -37,10 +37,7 @@ namespace RabidWombat.Macro.Events.Mouse
                 switch (e.Name)
                 {
                     case "Location":
-                        var coords = e.InnerText.Split(',');
-                        int x = int.Parse(coords[0]);
-                        int y = int.Parse(coords[1]);
-                        Location = new Point(x, y);
+                        Location = Point.Parse(e.InnerText);
                         break;
                     case "Button":
                         Button = (MouseButtons)Enum.Parse(typeof(MouseButtons), e.InnerText);

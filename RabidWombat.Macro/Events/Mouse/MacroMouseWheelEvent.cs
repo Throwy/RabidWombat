@@ -1,5 +1,5 @@
-﻿using System.Drawing;
-using System.Text;
+﻿using System.Text;
+using System.Windows;
 using System.Xml;
 
 namespace RabidWombat.Macro.Events.Mouse
@@ -35,10 +35,7 @@ namespace RabidWombat.Macro.Events.Mouse
                 switch (e.Name)
                 {
                     case "Location":
-                        var coords = e.InnerText.Split(',');
-                        int x = int.Parse(coords[0]);
-                        int y = int.Parse(coords[1]);
-                        Location = new Point(x, y);
+                        Location = Point.Parse(e.InnerText);
                         break;
                     case "Delta":
                         Delta = int.Parse(e.InnerText);
