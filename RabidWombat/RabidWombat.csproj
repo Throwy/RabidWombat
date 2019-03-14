@@ -49,6 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\LoopsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LoopsDialog.Designer.cs">
+      <DependentUpon>LoopsDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\ConfigurationFile.cs" />
     <Compile Include="Models\HotKeys.cs" />
     <Compile Include="Models\JsonSerializable.cs" />
@@ -60,6 +66,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\LoopsDialog.resx">
+      <DependentUpon>LoopsDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

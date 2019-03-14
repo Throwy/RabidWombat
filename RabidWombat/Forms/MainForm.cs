@@ -29,15 +29,15 @@ namespace RabidWombat.Forms
         private void btnStartRecord_Click(object sender, EventArgs e)
         {
             // confirm action
-            if(_recorder.CurrentMacro != null && _recorder.CurrentMacro.Events.Length > 0)
+            if (_recorder.CurrentMacro != null && _recorder.CurrentMacro.Events.Length > 0)
             {
                 var result = MessageBox.Show("This will continue appending to your current macro, would you like to start over and clear the current macro>", "Clear macro?", MessageBoxButtons.YesNoCancel,
                     MessageBoxIcon.Warning);
-                if(result == DialogResult.Yes)
+                if (result == DialogResult.Yes)
                 {
                     _recorder.Clear();
                 }
-                else if(result == DialogResult.Cancel)
+                else if (result == DialogResult.Cancel)
                 {
                     return;
                 }
@@ -69,7 +69,7 @@ namespace RabidWombat.Forms
         private void btnSaveMacro_Click(object sender, EventArgs e)
         {
             // check for macro to save
-            if(_recorder.CurrentMacro == null || _recorder.CurrentMacro.Events.Length == 0)
+            if (_recorder.CurrentMacro == null || _recorder.CurrentMacro.Events.Length == 0)
             {
                 MessageBox.Show("There is no macro currently recorded.", "Cannot save macro.", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -83,7 +83,7 @@ namespace RabidWombat.Forms
             };
 
             //save file
-            if(dialog.ShowDialog() == DialogResult.OK)
+            if (dialog.ShowDialog() == DialogResult.OK)
             {
                 _recorder.CurrentMacro.Save(dialog.FileName);
             }
@@ -92,10 +92,10 @@ namespace RabidWombat.Forms
         private void btnOpenMacro_Click(object sender, EventArgs e)
         {
             // confirm action
-            if(_recorder.CurrentMacro != null && _recorder.CurrentMacro.Events.Length > 0)
+            if (_recorder.CurrentMacro != null && _recorder.CurrentMacro.Events.Length > 0)
             {
                 var result = MessageBox.Show("Are you sure you want to load this file and overwrite the current macro?", "Clear macro?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if(result == DialogResult.No)
+                if (result == DialogResult.No)
                 {
                     return;
                 }
@@ -109,11 +109,33 @@ namespace RabidWombat.Forms
             };
 
             // load macro into recorder
-            if(dialog.ShowDialog() == DialogResult.OK)
+            if (dialog.ShowDialog() == DialogResult.OK)
             {
                 var loadedMacro = new Macro.Macro();
                 loadedMacro.Load(dialog.FileName);
                 _recorder.LoadMacro(loadedMacro);
+            }
+        }
+
+        private void btnLoops_Click(object sender, EventArgs e)
+        {
+            var dialog = new LoopsDialog { Loops = _player.Repetitions };
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                _player.Repetitions = dialog.Loops;
+            }
+        }
+
+        private void btnClearMacro_Click(object sender, EventArgs e)
+        {
+            // confirm action
+            if(_recorder.CurrentMacro != null && _recorder.CurrentMacro.Events.Length > 0)
+            {
+                var result = MessageBox.Show("Are you sure you want to clear the current macro?", "Clear Macro?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if(result == DialogResult.Yes)
+                {
+                    _recorder.Clear();
+                }
             }
         }
     }
