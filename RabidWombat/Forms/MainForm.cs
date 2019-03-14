@@ -2,6 +2,7 @@
 using RabidWombat.Models;
 using System;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace RabidWombat.Forms
@@ -14,6 +15,22 @@ namespace RabidWombat.Forms
         private readonly MacroRecorder _recorder = new MacroRecorder();
         private readonly MacroPlayer _player = new MacroPlayer();
 
+        [DllImport("user32.dll")]
+        public static extern bool RegisterHotKey(IntPtr hWnd, int id, int fsModifiers, int vk);
+        [DllImport("user32.dll")]
+        private static extern bool UnregisterHotKey(IntPtr hWnd, int id);
+
+        private const int WM_HOTKEY = 0x0312;
+
+        private enum fsModifiers : uint
+        {
+            Alt = 0x0001,
+            Control = 0x0002,
+            Shift = 0x0004,
+            Windows = 0x0008,
+            NoRepeat = 0x4000
+        }
+
         public MainForm()
         {
             InitializeComponent();
@@ -24,6 +41,36 @@ namespace RabidWombat.Forms
                 new ConfigurationFile().Save(CONFIGURATION_FILE_PATH);
             }
             _config = ConfigurationFile.FromFile(CONFIGURATION_FILE_PATH);
+
+            RegisterHotKey(this.Handle, (int)Keys.Q, (int)fsModifiers.Control, Keys.Q.GetHashCode());
+            RegisterHotKey(this.Handle, (int)Keys.W, (int)fsModifiers.Control, Keys.W.GetHashCode());
+            RegisterHotKey(this.Handle, (int)Keys.E, (int)fsModifiers.Control, Keys.E.GetHashCode());
+            RegisterHotKey(this.Handle, (int)Keys.R, (int)fsModifiers.Control, Keys.R.GetHashCode());
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            UnregisterHotKey(this.Handle, (int)Keys.Q);
+            UnregisterHotKey(this.Handle, (int)Keys.W);
+            UnregisterHotKey(this.Handle, (int)Keys.E);
+            UnregisterHotKey(this.Handle, (int)Keys.R);
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            base.WndProc(ref m);
+
+            if (m.Msg == WM_HOTKEY)
+            {
+                /* Note that the three lines below are not needed if you only want to register one hotkey.
+                 * The below lines are useful in case you want to register multiple keys, which you can use a switch with the id as argument, or if you want to know which key/modifier was pressed for some particular reason. */
+
+                Keys key = (Keys)(((int)m.LParam >> 16) & 0xFFFF);                  // The key of the hotkey that was pressed.
+                fsModifiers modifier = (fsModifiers)((int)m.LParam & 0xFFFF);       // The modifier of the hotkey that was pressed.
+                int id = m.WParam.ToInt32();                                        // The id of the hotkey that was pressed.
+
+                MessageBox.Show("Hotkey has been pressed!");
+            }
         }
 
         private void btnStartRecord_Click(object sender, EventArgs e)
@@ -129,10 +176,10 @@ namespace RabidWombat.Forms
         private void btnClearMacro_Click(object sender, EventArgs e)
         {
             // confirm action
-            if(_recorder.CurrentMacro != null && _recorder.CurrentMacro.Events.Length > 0)
+            if (_recorder.CurrentMacro != null && _recorder.CurrentMacro.Events.Length > 0)
             {
                 var result = MessageBox.Show("Are you sure you want to clear the current macro?", "Clear Macro?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if(result == DialogResult.Yes)
+                if (result == DialogResult.Yes)
                 {
                     _recorder.Clear();
                 }

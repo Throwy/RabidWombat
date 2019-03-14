@@ -129,6 +129,10 @@
       <Project>{E83FF950-9DDF-42BE-BC36-605BD4B85D4A}</Project>
       <Name>RabidWombat.Macro</Name>
     </ProjectReference>
+    <ProjectReference Include="..\RabidWombat.Simulation\RabidWombat.Simulation.csproj">
+      <Project>{236F5FFE-B2BA-467C-AF54-4F7B1B4AE232}</Project>
+      <Name>RabidWombat.Simulation</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
