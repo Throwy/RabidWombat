@@ -42,6 +42,7 @@ namespace RabidWombat.Forms
             }
             _config = ConfigurationFile.FromFile(CONFIGURATION_FILE_PATH);
 
+            // register the hotkeys for buttons
             RegisterHotKey(this.Handle, (int)Keys.Q, (int)fsModifiers.Control, Keys.Q.GetHashCode());
             RegisterHotKey(this.Handle, (int)Keys.W, (int)fsModifiers.Control, Keys.W.GetHashCode());
             RegisterHotKey(this.Handle, (int)Keys.E, (int)fsModifiers.Control, Keys.E.GetHashCode());
@@ -50,6 +51,7 @@ namespace RabidWombat.Forms
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            // unregister all hotkeys when the form is closed
             UnregisterHotKey(this.Handle, (int)Keys.Q);
             UnregisterHotKey(this.Handle, (int)Keys.W);
             UnregisterHotKey(this.Handle, (int)Keys.E);
