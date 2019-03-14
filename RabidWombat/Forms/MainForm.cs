@@ -12,6 +12,7 @@ namespace RabidWombat.Forms
         private readonly ConfigurationFile _config;
 
         private readonly MacroRecorder _recorder = new MacroRecorder();
+        private readonly MacroPlayer _player = new MacroPlayer();
 
         public MainForm()
         {
@@ -54,12 +55,15 @@ namespace RabidWombat.Forms
 
         private void btnPlayMacro_Click(object sender, EventArgs e)
         {
-            // TODO
+            // load and play macro
+            _player.LoadMacro(_recorder.CurrentMacro);
+            _player.PlayMacroAsync();
         }
 
         private void btnStopMacro_Click(object sender, EventArgs e)
         {
-            // TODO
+            // stop playing
+            _player.CancelPlayback();
         }
 
         private void btnSaveMacro_Click(object sender, EventArgs e)
@@ -88,7 +92,7 @@ namespace RabidWombat.Forms
         private void btnOpenMacro_Click(object sender, EventArgs e)
         {
             // confirm action
-            if(_recorder.CurrentMacro != null || _recorder.CurrentMacro.Events.Length > 0)
+            if(_recorder.CurrentMacro != null && _recorder.CurrentMacro.Events.Length > 0)
             {
                 var result = MessageBox.Show("Are you sure you want to load this file and overwrite the current macro?", "Clear macro?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if(result == DialogResult.No)
