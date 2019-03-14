@@ -36,6 +36,9 @@
             this.btnOpenMacro = new System.Windows.Forms.Button();
             this.btnLoops = new System.Windows.Forms.Button();
             this.btnClearMacro = new System.Windows.Forms.Button();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnStartRecord
@@ -110,7 +113,7 @@
             // 
             // btnClearMacro
             // 
-            this.btnClearMacro.Location = new System.Drawing.Point(12, 415);
+            this.btnClearMacro.Location = new System.Drawing.Point(12, 394);
             this.btnClearMacro.Name = "btnClearMacro";
             this.btnClearMacro.Size = new System.Drawing.Size(90, 23);
             this.btnClearMacro.TabIndex = 7;
@@ -118,11 +121,27 @@
             this.btnClearMacro.UseVisualStyleBackColor = true;
             this.btnClearMacro.Click += new System.EventHandler(this.btnClearMacro_Click);
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblStatus});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 423);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(800, 22);
+            this.statusStrip1.TabIndex = 8;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(0, 17);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 445);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.btnClearMacro);
             this.Controls.Add(this.btnLoops);
             this.Controls.Add(this.btnOpenMacro);
@@ -136,7 +155,10 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Rabid Wombat";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -150,6 +172,8 @@
         private System.Windows.Forms.Button btnOpenMacro;
         private System.Windows.Forms.Button btnLoops;
         private System.Windows.Forms.Button btnClearMacro;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel lblStatus;
     }
 }
 

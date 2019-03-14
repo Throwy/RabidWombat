@@ -42,6 +42,8 @@ namespace RabidWombat.Forms
             }
             _config = ConfigurationFile.FromFile(CONFIGURATION_FILE_PATH);
 
+            lblStatus.Text = "Ready...";
+
             // register the hotkeys for buttons
             RegisterHotKey(this.Handle, (int)Keys.Q, (int)fsModifiers.Control, Keys.Q.GetHashCode());
             RegisterHotKey(this.Handle, (int)Keys.W, (int)fsModifiers.Control, Keys.W.GetHashCode());
@@ -115,6 +117,7 @@ namespace RabidWombat.Forms
             }
 
             // start recording
+            lblStatus.Text = "Recording...";
             _recorder.StartRecording();
         }
 
@@ -122,18 +125,22 @@ namespace RabidWombat.Forms
         {
             // stop recording
             _recorder.StopRecording();
+            lblStatus.Text = "Recording finished.";
         }
 
         private void btnPlayMacro_Click(object sender, EventArgs e)
         {
             // load and play macro
+            lblStatus.Text = "Playing Macro...";
             _player.LoadMacro(_recorder.CurrentMacro);
             _player.PlayMacroAsync();
+            lblStatus.Text = "Macro finished.";
         }
 
         private void btnStopMacro_Click(object sender, EventArgs e)
         {
             // stop playing
+            lblStatus.Text = "Macro stopped.";
             _player.CancelPlayback();
         }
 
@@ -205,6 +212,7 @@ namespace RabidWombat.Forms
                 var result = MessageBox.Show("Are you sure you want to clear the current macro?", "Clear Macro?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (result == DialogResult.Yes)
                 {
+                    lblStatus.Text = "Macro Cleared. Ready...";
                     _recorder.Clear();
                 }
             }
