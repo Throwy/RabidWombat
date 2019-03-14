@@ -86,5 +86,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RabidWombat.Macro\RabidWombat.Macro.csproj">
+      <Project>{E83FF950-9DDF-42BE-BC36-605BD4B85D4A}</Project>
+      <Name>RabidWombat.Macro</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

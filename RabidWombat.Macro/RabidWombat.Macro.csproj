@@ -55,8 +55,14 @@
     <Compile Include="Events\KeyBoard\MacroKeyDownEvent.cs" />
     <Compile Include="Events\KeyBoard\MacroKeyEvent.cs" />
     <Compile Include="Events\KeyBoard\MacroKeyUpEvent.cs" />
+    <Compile Include="MacroRecorder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\RabidWombat.Hooks\RabidWombat.Hooks.csproj">
+      <Project>{878352DC-E3FB-421B-802F-3F9B700A0A65}</Project>
+      <Name>RabidWombat.Hooks</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
