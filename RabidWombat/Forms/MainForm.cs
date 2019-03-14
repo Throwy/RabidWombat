@@ -64,14 +64,36 @@ namespace RabidWombat.Forms
 
             if (m.Msg == WM_HOTKEY)
             {
-                /* Note that the three lines below are not needed if you only want to register one hotkey.
-                 * The below lines are useful in case you want to register multiple keys, which you can use a switch with the id as argument, or if you want to know which key/modifier was pressed for some particular reason. */
+                Keys key = (Keys)(((int)m.LParam >> 16) & 0xFFFF);
+                fsModifiers modifier = (fsModifiers)((int)m.LParam & 0xFFFF);
+                int id = m.WParam.ToInt32();
 
-                Keys key = (Keys)(((int)m.LParam >> 16) & 0xFFFF);                  // The key of the hotkey that was pressed.
-                fsModifiers modifier = (fsModifiers)((int)m.LParam & 0xFFFF);       // The modifier of the hotkey that was pressed.
-                int id = m.WParam.ToInt32();                                        // The id of the hotkey that was pressed.
+                HandleHotkey(modifier, key);
+            }
+        }
 
-                MessageBox.Show("Hotkey has been pressed!");
+        /// <summary>
+        /// Handles hot key presses.
+        /// </summary>
+        /// <param name="modifier">The modifier key pressed.</param>
+        /// <param name="key">The key pressed.</param>
+        private void HandleHotkey(fsModifiers modifier, Keys key)
+        {
+            switch(key)
+            {
+                case Keys.Q:
+                    btnStartRecord.PerformClick();
+                    break;
+
+                case Keys.W:
+                    btnStopRecord.PerformClick();
+                    break;
+                case Keys.E:
+                    btnPlayMacro.PerformClick();
+                    break;
+                case Keys.R:
+                    btnStopMacro.PerformClick();
+                    break;
             }
         }
 
