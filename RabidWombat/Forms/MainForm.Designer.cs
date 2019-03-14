@@ -32,6 +32,8 @@
             this.btnStopRecord = new System.Windows.Forms.Button();
             this.btnPlayMacro = new System.Windows.Forms.Button();
             this.btnStopMacro = new System.Windows.Forms.Button();
+            this.btnSaveMacro = new System.Windows.Forms.Button();
+            this.btnOpenMacro = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnStartRecord
@@ -74,11 +76,33 @@
             this.btnStopMacro.UseVisualStyleBackColor = true;
             this.btnStopMacro.Click += new System.EventHandler(this.btnStopMacro_Click);
             // 
+            // btnSaveMacro
+            // 
+            this.btnSaveMacro.Location = new System.Drawing.Point(12, 185);
+            this.btnSaveMacro.Name = "btnSaveMacro";
+            this.btnSaveMacro.Size = new System.Drawing.Size(90, 25);
+            this.btnSaveMacro.TabIndex = 4;
+            this.btnSaveMacro.Text = "Save Macro";
+            this.btnSaveMacro.UseVisualStyleBackColor = true;
+            this.btnSaveMacro.Click += new System.EventHandler(this.btnSaveMacro_Click);
+            // 
+            // btnOpenMacro
+            // 
+            this.btnOpenMacro.Location = new System.Drawing.Point(12, 216);
+            this.btnOpenMacro.Name = "btnOpenMacro";
+            this.btnOpenMacro.Size = new System.Drawing.Size(90, 25);
+            this.btnOpenMacro.TabIndex = 5;
+            this.btnOpenMacro.Text = "Open Macro";
+            this.btnOpenMacro.UseVisualStyleBackColor = true;
+            this.btnOpenMacro.Click += new System.EventHandler(this.btnOpenMacro_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnOpenMacro);
+            this.Controls.Add(this.btnSaveMacro);
             this.Controls.Add(this.btnStopMacro);
             this.Controls.Add(this.btnPlayMacro);
             this.Controls.Add(this.btnStopRecord);
@@ -95,6 +119,8 @@
         private System.Windows.Forms.Button btnStopRecord;
         private System.Windows.Forms.Button btnPlayMacro;
         private System.Windows.Forms.Button btnStopMacro;
+        private System.Windows.Forms.Button btnSaveMacro;
+        private System.Windows.Forms.Button btnOpenMacro;
     }
 }
 

@@ -61,5 +61,56 @@ namespace RabidWombat.Forms
         {
             // TODO
         }
+
+        private void btnSaveMacro_Click(object sender, EventArgs e)
+        {
+            // check for macro to save
+            if(_recorder.CurrentMacro == null || _recorder.CurrentMacro.Events.Length == 0)
+            {
+                MessageBox.Show("There is no macro currently recorded.", "Cannot save macro.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // choose file to save to
+            var dialog = new SaveFileDialog
+            {
+                Title = "Save Macro",
+                Filter = "RabidWombat Macro Files (*.rbwt)|*.rbwt|All Files (*.*)|*.*"
+            };
+
+            //save file
+            if(dialog.ShowDialog() == DialogResult.OK)
+            {
+                _recorder.CurrentMacro.Save(dialog.FileName);
+            }
+        }
+
+        private void btnOpenMacro_Click(object sender, EventArgs e)
+        {
+            // confirm action
+            if(_recorder.CurrentMacro != null || _recorder.CurrentMacro.Events.Length > 0)
+            {
+                var result = MessageBox.Show("Are you sure you want to load this file and overwrite the current macro?", "Clear macro?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if(result == DialogResult.No)
+                {
+                    return;
+                }
+            }
+
+            // browse for file
+            var dialog = new OpenFileDialog
+            {
+                Title = "Open Macro",
+                Filter = "RabidWombat Macro Files (*.rbwt)|*.rbwt|All Files (*.*)|*.*"
+            };
+
+            // load macro into recorder
+            if(dialog.ShowDialog() == DialogResult.OK)
+            {
+                var loadedMacro = new Macro.Macro();
+                loadedMacro.Load(dialog.FileName);
+                _recorder.LoadMacro(loadedMacro);
+            }
+        }
     }
 }
