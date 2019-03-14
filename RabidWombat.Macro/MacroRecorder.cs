@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RabidWombat.Hooks.EventHandlers;
+﻿using RabidWombat.Hooks.EventHandlers;
 using RabidWombat.Hooks.Windows;
 using RabidWombat.Macro.Events;
 using RabidWombat.Macro.Events.Keyboard;
 using RabidWombat.Macro.Events.Mouse;
+using System;
 
 namespace RabidWombat.Macro
 {
@@ -91,7 +87,7 @@ namespace RabidWombat.Macro
         /// </summary>
         public void StartRecording()
         {
-            if(CurrentMacro == null)
+            if (CurrentMacro == null)
             {
                 Clear();
             }
@@ -109,7 +105,7 @@ namespace RabidWombat.Macro
 
         private void hook_KeyDown(object sender, GlobalKeyEventHandlerArgs e)
         {
-            if(IsRecording)
+            if (IsRecording)
             {
                 AddDelayEvent();
                 CurrentMacro.AddEvent(new MacroKeyDownEvent(e.VirtualKeyCode));
@@ -118,7 +114,7 @@ namespace RabidWombat.Macro
 
         private void hook_KeyUp(object sender, GlobalKeyEventHandlerArgs e)
         {
-            if(IsRecording)
+            if (IsRecording)
             {
                 AddDelayEvent();
                 CurrentMacro.AddEvent(new MacroKeyUpEvent(e.VirtualKeyCode));
@@ -127,7 +123,7 @@ namespace RabidWombat.Macro
 
         private void hook_MouseDown(object sender, GlobalMouseEventHandlerArgs e)
         {
-            if(IsRecording)
+            if (IsRecording)
             {
                 AddDelayEvent();
                 CurrentMacro.AddEvent(new MacroMouseDownEvent(e.Point, e.Button));
@@ -136,7 +132,7 @@ namespace RabidWombat.Macro
 
         private void hook_MouseUp(object sender, GlobalMouseEventHandlerArgs e)
         {
-            if(IsRecording)
+            if (IsRecording)
             {
                 AddDelayEvent();
                 CurrentMacro.AddEvent(new MacroMouseUpEvent(e.Point, e.Button));
@@ -145,7 +141,7 @@ namespace RabidWombat.Macro
 
         private void hook_MouseMove(object sender, GlobalMouseEventHandlerArgs e)
         {
-            if(IsRecording)
+            if (IsRecording)
             {
                 AddDelayEvent();
                 CurrentMacro.AddEvent(new MacroMouseMoveEvent(e.Point));
@@ -154,7 +150,7 @@ namespace RabidWombat.Macro
 
         private void hook_MouseWheel(object sender, GlobalMouseEventHandlerArgs e)
         {
-            if(IsRecording)
+            if (IsRecording)
             {
                 AddDelayEvent();
                 CurrentMacro.AddEvent(new MacroMouseWheelEvent(e.Point, e.Delta));
