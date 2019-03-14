@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Forms;
+using System.Windows.Input;
 
 namespace RabidWombat.Hooks.EventHandlers
 {
@@ -18,7 +19,7 @@ namespace RabidWombat.Hooks.EventHandlers
         /// <summary>
         /// The mouse button associated with the message.
         /// </summary>
-        public MouseButtons Button { get; private set; }
+        public MouseButton Button { get; private set; }
 
         /// <summary>
         /// Contains information about mouse X buttons or the mouse wheel if relevant.
@@ -55,7 +56,7 @@ namespace RabidWombat.Hooks.EventHandlers
         /// <param name="time">The time stamp for this message.</param>
         /// <param name="extraInfo">Additional information associated with the message.</param>
         /// <param name="delta">The mouse scroll wheel delta value if relevant.</param>
-        public GlobalMouseEventHandlerArgs(Point point, MouseButtons button, int mouseData, int flags, int time, int extraInfo, int delta)
+        public GlobalMouseEventHandlerArgs(Point point, MouseButton button, int mouseData, int flags, int time, int extraInfo, int delta)
         {
             Point = point;
             Button = button;

@@ -2,6 +2,7 @@
 using System.Text;
 using System.Windows;
 using System.Windows.Forms;
+using System.Windows.Input;
 using System.Xml;
 
 namespace RabidWombat.Macro.Events.Mouse
@@ -14,14 +15,14 @@ namespace RabidWombat.Macro.Events.Mouse
         /// <summary>
         /// Gets or sets the mouse button associated with the event.
         /// </summary>
-        public MouseButtons Button { get; set; }
+        public MouseButton Button { get; set; }
 
         /// <summary>
         /// Initializes a new instance of a macro mouse up event.
         /// </summary>
         /// <param name="location"></param>
         /// <param name="button"></param>
-        public MacroMouseUpEvent(Point location, MouseButtons button) : base(location)
+        public MacroMouseUpEvent(Point location, MouseButton button) : base(location)
         {
             this.Button = button;
         }
@@ -40,7 +41,7 @@ namespace RabidWombat.Macro.Events.Mouse
                         Location = Point.Parse(e.InnerText);
                         break;
                     case "Button":
-                        Button = (MouseButtons)Enum.Parse(typeof(MouseButtons), e.InnerText);
+                        Button = (MouseButton)Enum.Parse(typeof(MouseButton), e.InnerText);
                         break;
                     default:
                         break;

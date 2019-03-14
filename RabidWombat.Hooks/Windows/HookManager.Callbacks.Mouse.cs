@@ -3,6 +3,7 @@ using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using System.Windows.Input;
 
 namespace RabidWombat.Hooks.Windows
 {
@@ -45,14 +46,14 @@ namespace RabidWombat.Hooks.Windows
                 MSLLHOOKSTRUCT mouseHookStruct = (MSLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(MSLLHOOKSTRUCT));
 
                 // Detect mouse button used.
-                MouseButtons button = MouseButtons.Middle;
+                MouseButton button = MouseButton.Middle;
                 if (wParam == WM_RBUTTONDBLCLK || wParam == WM_RBUTTONDOWN || wParam == WM_RBUTTONUP)
                 {
-                    button = MouseButtons.Right;
+                    button = MouseButton.Right;
                 }
                 else if (wParam == WM_LBUTTONDBLCLK || wParam == WM_LBUTTONDOWN || wParam == WM_LBUTTONUP)
                 {
-                    button = MouseButtons.Left;
+                    button = MouseButton.Left;
                 }
 
                 // Generate event.
