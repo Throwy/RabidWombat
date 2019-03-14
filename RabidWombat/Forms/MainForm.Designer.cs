@@ -131,7 +131,9 @@
             this.Controls.Add(this.btnPlayMacro);
             this.Controls.Add(this.btnStopRecord);
             this.Controls.Add(this.btnStartRecord);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "MainForm";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Rabid Wombat";
             this.ResumeLayout(false);
 
