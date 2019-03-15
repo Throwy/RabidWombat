@@ -53,7 +53,7 @@
             // 
             // btnStopRecord
             // 
-            this.btnStopRecord.Location = new System.Drawing.Point(12, 43);
+            this.btnStopRecord.Location = new System.Drawing.Point(108, 12);
             this.btnStopRecord.Name = "btnStopRecord";
             this.btnStopRecord.Size = new System.Drawing.Size(90, 25);
             this.btnStopRecord.TabIndex = 1;
@@ -63,7 +63,7 @@
             // 
             // btnPlayMacro
             // 
-            this.btnPlayMacro.Location = new System.Drawing.Point(12, 97);
+            this.btnPlayMacro.Location = new System.Drawing.Point(12, 59);
             this.btnPlayMacro.Name = "btnPlayMacro";
             this.btnPlayMacro.Size = new System.Drawing.Size(90, 25);
             this.btnPlayMacro.TabIndex = 2;
@@ -73,7 +73,7 @@
             // 
             // btnStopMacro
             // 
-            this.btnStopMacro.Location = new System.Drawing.Point(12, 128);
+            this.btnStopMacro.Location = new System.Drawing.Point(108, 59);
             this.btnStopMacro.Name = "btnStopMacro";
             this.btnStopMacro.Size = new System.Drawing.Size(90, 25);
             this.btnStopMacro.TabIndex = 3;
@@ -83,7 +83,7 @@
             // 
             // btnSaveMacro
             // 
-            this.btnSaveMacro.Location = new System.Drawing.Point(12, 185);
+            this.btnSaveMacro.Location = new System.Drawing.Point(12, 108);
             this.btnSaveMacro.Name = "btnSaveMacro";
             this.btnSaveMacro.Size = new System.Drawing.Size(90, 25);
             this.btnSaveMacro.TabIndex = 4;
@@ -93,7 +93,7 @@
             // 
             // btnOpenMacro
             // 
-            this.btnOpenMacro.Location = new System.Drawing.Point(12, 216);
+            this.btnOpenMacro.Location = new System.Drawing.Point(108, 108);
             this.btnOpenMacro.Name = "btnOpenMacro";
             this.btnOpenMacro.Size = new System.Drawing.Size(90, 25);
             this.btnOpenMacro.TabIndex = 5;
@@ -103,7 +103,7 @@
             // 
             // btnLoops
             // 
-            this.btnLoops.Location = new System.Drawing.Point(12, 298);
+            this.btnLoops.Location = new System.Drawing.Point(12, 155);
             this.btnLoops.Name = "btnLoops";
             this.btnLoops.Size = new System.Drawing.Size(90, 23);
             this.btnLoops.TabIndex = 6;
@@ -113,7 +113,7 @@
             // 
             // btnClearMacro
             // 
-            this.btnClearMacro.Location = new System.Drawing.Point(12, 394);
+            this.btnClearMacro.Location = new System.Drawing.Point(108, 155);
             this.btnClearMacro.Name = "btnClearMacro";
             this.btnClearMacro.Size = new System.Drawing.Size(90, 23);
             this.btnClearMacro.TabIndex = 7;
@@ -125,9 +125,9 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblStatus});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 423);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 196);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(800, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(214, 22);
             this.statusStrip1.TabIndex = 8;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -140,7 +140,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 445);
+            this.ClientSize = new System.Drawing.Size(214, 218);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.btnClearMacro);
             this.Controls.Add(this.btnLoops);
