@@ -81,20 +81,31 @@ namespace RabidWombat.Forms
         /// <param name="key">The key pressed.</param>
         private void HandleHotkey(fsModifiers modifier, Keys key)
         {
-            switch(key)
+            switch (key)
             {
                 case Keys.Q:
-                    btnStartRecord.PerformClick();
+                    if (!_recorder.IsRecording)
+                    {
+                        btnStartRecord.PerformClick();
+                    }
                     break;
-
                 case Keys.W:
-                    btnStopRecord.PerformClick();
+                    if (_recorder.IsRecording)
+                    {
+                        btnStopRecord.PerformClick();
+                    }
                     break;
                 case Keys.E:
-                    btnPlayMacro.PerformClick();
+                    if (!_player.IsPlaying)
+                    {
+                        btnPlayMacro.PerformClick();
+                    }
                     break;
                 case Keys.R:
-                    btnStopMacro.PerformClick();
+                    if (_player.IsPlaying)
+                    {
+                        btnStopMacro.PerformClick();
+                    }
                     break;
             }
         }
