@@ -42,6 +42,11 @@ namespace RabidWombat.Macro
         private readonly Random _random = new Random();
 
         /// <summary>
+        /// Holds the last jittered click location so mouse up lands at the same spot as mouse down.
+        /// </summary>
+        private Point? _lastClickTarget;
+
+        /// <summary>
         /// Holds the number of times the macro should repeat before ending.
         /// </summary>
         private int repetitions;
@@ -131,6 +136,28 @@ namespace RabidWombat.Macro
         }
 
         /// <summary>
+        /// Moves the mouse to an absolute target position over interpolated steps.
+        /// Used for click/scroll events that may jump to a new position.
+        /// </summary>
+        private void MoveMouseSmooth(Point absoluteTarget)
+        {
+            double screenW = Screen.PrimaryScreen.Bounds.Width;
+            double screenH = Screen.PrimaryScreen.Bounds.Height;
+            Point from = new Point(
+                65535.0 * Cursor.Position.X / screenW,
+                65535.0 * Cursor.Position.Y / screenH);
+
+            const int steps = 5;
+            for (int step = 1; step <= steps; step++)
+            {
+                double t = (double)step / steps;
+                mouseSimulator.MoveMouseTo(
+                    from.X + (absoluteTarget.X - from.X) * t,
+                    from.Y + (absoluteTarget.Y - from.Y) * t);
+            }
+        }
+
+        /// <summary>
         /// Plays the macro on the current thread.
         /// </summary>
         private void PlayMacro()
@@ -154,17 +181,17 @@ namespace RabidWombat.Macro
                         int jitterMs = DelayJitter > 0 ? _random.Next(0, DelayJitter + 1) : 0;
                         Thread.Sleep(new TimeSpan(delayEvent.Delay) + TimeSpan.FromMilliseconds(jitterMs));
                     }
-                    // mouse move event
+                    // mouse move event — move directly since recorded points already form the path
                     else if (current is MacroMouseMoveEvent mouseMoveEvent)
                     {
-                        Point absolutePoint = ConvertPointToAbsolute(ApplyMouseJitter(mouseMoveEvent.Location));
-                        mouseSimulator.MoveMouseTo(absolutePoint.X, absolutePoint.Y);
+                        Point abs = ConvertPointToAbsolute(mouseMoveEvent.Location);
+                        mouseSimulator.MoveMouseTo(abs.X, abs.Y);
                     }
                     // mouse down event
                     else if (current is MacroMouseDownEvent mouseDownEvent)
                     {
-                        Point absolutePoint = ConvertPointToAbsolute(ApplyMouseJitter(mouseDownEvent.Location));
-                        mouseSimulator.MoveMouseTo(absolutePoint.X, absolutePoint.Y);
+                        _lastClickTarget = ConvertPointToAbsolute(ApplyMouseJitter(mouseDownEvent.Location));
+                        MoveMouseSmooth(_lastClickTarget.Value);
                         if (mouseDownEvent.Button == System.Windows.Input.MouseButton.Left)
                         {
                             mouseSimulator.LeftButtonDown();
@@ -177,8 +204,9 @@ namespace RabidWombat.Macro
                     // mouse up event
                     else if (current is MacroMouseUpEvent mouseUpEvent)
                     {
-                        Point absolutePoint = ConvertPointToAbsolute(ApplyMouseJitter(mouseUpEvent.Location));
-                        mouseSimulator.MoveMouseTo(absolutePoint.X, absolutePoint.Y);
+                        Point upTarget = _lastClickTarget ?? ConvertPointToAbsolute(mouseUpEvent.Location);
+                        _lastClickTarget = null;
+                        MoveMouseSmooth(upTarget);
                         if (mouseUpEvent.Button == System.Windows.Input.MouseButton.Left)
                         {
                             mouseSimulator.LeftButtonUp();
@@ -201,8 +229,7 @@ namespace RabidWombat.Macro
                     // mouse wheel event
                     else if (current is MacroMouseWheelEvent mouseWheelEvent)
                     {
-                        Point absolutePoint = ConvertPointToAbsolute(ApplyMouseJitter(mouseWheelEvent.Location));
-                        mouseSimulator.MoveMouseTo(absolutePoint.X, absolutePoint.Y);
+                        MoveMouseSmooth(ConvertPointToAbsolute(mouseWheelEvent.Location));
                         mouseSimulator.VerticalScroll(mouseWheelEvent.Delta / 120);
                     }
                 }
