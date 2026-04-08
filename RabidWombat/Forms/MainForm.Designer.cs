@@ -37,9 +37,15 @@
             this.lblLoops = new System.Windows.Forms.Label();
             this.nmbrLoops = new System.Windows.Forms.NumericUpDown();
             this.btnClearMacro = new System.Windows.Forms.Button();
+            this.lblDelayJitter = new System.Windows.Forms.Label();
+            this.nmbrDelayJitter = new System.Windows.Forms.NumericUpDown();
+            this.lblMouseJitter = new System.Windows.Forms.Label();
+            this.nmbrMouseJitter = new System.Windows.Forms.NumericUpDown();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.nmbrLoops)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmbrDelayJitter)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmbrMouseJitter)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -131,14 +137,53 @@
             this.btnClearMacro.Text = "Clear Macro";
             this.btnClearMacro.UseVisualStyleBackColor = true;
             this.btnClearMacro.Click += new System.EventHandler(this.btnClearMacro_Click);
-            // 
+            //
+            // lblDelayJitter
+            //
+            this.lblDelayJitter.AutoSize = true;
+            this.lblDelayJitter.Location = new System.Drawing.Point(12, 190);
+            this.lblDelayJitter.Name = "lblDelayJitter";
+            this.lblDelayJitter.TabIndex = 9;
+            this.lblDelayJitter.Text = "Delay Jitter (ms):";
+            //
+            // nmbrDelayJitter
+            //
+            this.nmbrDelayJitter.Location = new System.Drawing.Point(130, 187);
+            this.nmbrDelayJitter.Minimum = new decimal(new int[] { 0, 0, 0, 0 });
+            this.nmbrDelayJitter.Maximum = new decimal(new int[] { 5000, 0, 0, 0 });
+            this.nmbrDelayJitter.Name = "nmbrDelayJitter";
+            this.nmbrDelayJitter.Size = new System.Drawing.Size(65, 23);
+            this.nmbrDelayJitter.TabIndex = 10;
+            this.nmbrDelayJitter.Value = new decimal(new int[] { 0, 0, 0, 0 });
+            this.nmbrDelayJitter.ValueChanged += new System.EventHandler(this.nmbrDelayJitter_ValueChanged);
+            //
+            // lblMouseJitter
+            //
+            this.lblMouseJitter.AutoSize = true;
+            this.lblMouseJitter.Location = new System.Drawing.Point(12, 216);
+            this.lblMouseJitter.Name = "lblMouseJitter";
+            this.lblMouseJitter.TabIndex = 11;
+            this.lblMouseJitter.Text = "Mouse Jitter (px):";
+            //
+            // nmbrMouseJitter
+            //
+            this.nmbrMouseJitter.Location = new System.Drawing.Point(130, 213);
+            this.nmbrMouseJitter.Minimum = new decimal(new int[] { 0, 0, 0, 0 });
+            this.nmbrMouseJitter.Maximum = new decimal(new int[] { 100, 0, 0, 0 });
+            this.nmbrMouseJitter.Name = "nmbrMouseJitter";
+            this.nmbrMouseJitter.Size = new System.Drawing.Size(65, 23);
+            this.nmbrMouseJitter.TabIndex = 12;
+            this.nmbrMouseJitter.Value = new decimal(new int[] { 0, 0, 0, 0 });
+            this.nmbrMouseJitter.ValueChanged += new System.EventHandler(this.nmbrMouseJitter_ValueChanged);
+            //
             // statusStrip1
-            // 
+            //
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblStatus});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 196);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 241);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(210, 22);
+            this.statusStrip1.SizingGrip = false;
             this.statusStrip1.TabIndex = 8;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -151,8 +196,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(210, 218);
+            this.ClientSize = new System.Drawing.Size(210, 263);
             this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.nmbrMouseJitter);
+            this.Controls.Add(this.lblMouseJitter);
+            this.Controls.Add(this.nmbrDelayJitter);
+            this.Controls.Add(this.lblDelayJitter);
             this.Controls.Add(this.btnClearMacro);
             this.Controls.Add(this.nmbrLoops);
             this.Controls.Add(this.lblLoops);
@@ -170,6 +219,8 @@
             this.Text = "Rabid Wombat";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.nmbrLoops)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmbrDelayJitter)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmbrMouseJitter)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -188,6 +239,10 @@
         private System.Windows.Forms.Label lblLoops;
         private System.Windows.Forms.NumericUpDown nmbrLoops;
         private System.Windows.Forms.Button btnClearMacro;
+        private System.Windows.Forms.Label lblDelayJitter;
+        private System.Windows.Forms.NumericUpDown nmbrDelayJitter;
+        private System.Windows.Forms.Label lblMouseJitter;
+        private System.Windows.Forms.NumericUpDown nmbrMouseJitter;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel lblStatus;
     }

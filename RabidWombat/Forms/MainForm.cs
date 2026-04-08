@@ -211,6 +211,16 @@ namespace RabidWombat.Forms
             _player.Repetitions = (int)nmbrLoops.Value;
         }
 
+        private void nmbrDelayJitter_ValueChanged(object sender, EventArgs e)
+        {
+            _player.DelayJitter = (int)nmbrDelayJitter.Value;
+        }
+
+        private void nmbrMouseJitter_ValueChanged(object sender, EventArgs e)
+        {
+            _player.MouseJitter = (int)nmbrMouseJitter.Value;
+        }
+
         private void btnClearMacro_Click(object sender, EventArgs e)
         {
             // confirm action
