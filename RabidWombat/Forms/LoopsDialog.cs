@@ -12,6 +12,7 @@ namespace RabidWombat.Forms
 {
     public partial class LoopsDialog : Form
     {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int Loops
         {
             get { return (int)nmbrLoops.Value; }
