@@ -34,10 +34,12 @@
             this.btnStopMacro = new System.Windows.Forms.Button();
             this.btnSaveMacro = new System.Windows.Forms.Button();
             this.btnOpenMacro = new System.Windows.Forms.Button();
-            this.btnLoops = new System.Windows.Forms.Button();
+            this.lblLoops = new System.Windows.Forms.Label();
+            this.nmbrLoops = new System.Windows.Forms.NumericUpDown();
             this.btnClearMacro = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            ((System.ComponentModel.ISupportInitialize)(this.nmbrLoops)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -100,23 +102,32 @@
             this.btnOpenMacro.Text = "Open Macro";
             this.btnOpenMacro.UseVisualStyleBackColor = true;
             this.btnOpenMacro.Click += new System.EventHandler(this.btnOpenMacro_Click);
-            // 
-            // btnLoops
-            // 
-            this.btnLoops.Location = new System.Drawing.Point(12, 155);
-            this.btnLoops.Name = "btnLoops";
-            this.btnLoops.Size = new System.Drawing.Size(90, 23);
-            this.btnLoops.TabIndex = 6;
-            this.btnLoops.Text = "Loops";
-            this.btnLoops.UseVisualStyleBackColor = true;
-            this.btnLoops.Click += new System.EventHandler(this.btnLoops_Click);
-            // 
+            //
+            // lblLoops
+            //
+            this.lblLoops.AutoSize = true;
+            this.lblLoops.Location = new System.Drawing.Point(12, 159);
+            this.lblLoops.Name = "lblLoops";
+            this.lblLoops.TabIndex = 6;
+            this.lblLoops.Text = "Loops:";
+            //
+            // nmbrLoops
+            //
+            this.nmbrLoops.Location = new System.Drawing.Point(55, 155);
+            this.nmbrLoops.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            this.nmbrLoops.Maximum = new decimal(new int[] { 9999, 0, 0, 0 });
+            this.nmbrLoops.Name = "nmbrLoops";
+            this.nmbrLoops.Size = new System.Drawing.Size(47, 23);
+            this.nmbrLoops.TabIndex = 7;
+            this.nmbrLoops.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            this.nmbrLoops.ValueChanged += new System.EventHandler(this.nmbrLoops_ValueChanged);
+            //
             // btnClearMacro
             // 
             this.btnClearMacro.Location = new System.Drawing.Point(108, 155);
             this.btnClearMacro.Name = "btnClearMacro";
             this.btnClearMacro.Size = new System.Drawing.Size(90, 23);
-            this.btnClearMacro.TabIndex = 7;
+            this.btnClearMacro.TabIndex = 8;
             this.btnClearMacro.Text = "Clear Macro";
             this.btnClearMacro.UseVisualStyleBackColor = true;
             this.btnClearMacro.Click += new System.EventHandler(this.btnClearMacro_Click);
@@ -143,7 +154,8 @@
             this.ClientSize = new System.Drawing.Size(210, 218);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.btnClearMacro);
-            this.Controls.Add(this.btnLoops);
+            this.Controls.Add(this.nmbrLoops);
+            this.Controls.Add(this.lblLoops);
             this.Controls.Add(this.btnOpenMacro);
             this.Controls.Add(this.btnSaveMacro);
             this.Controls.Add(this.btnStopMacro);
@@ -157,6 +169,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Rabid Wombat";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            ((System.ComponentModel.ISupportInitialize)(this.nmbrLoops)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -172,7 +185,8 @@
         private System.Windows.Forms.Button btnStopMacro;
         private System.Windows.Forms.Button btnSaveMacro;
         private System.Windows.Forms.Button btnOpenMacro;
-        private System.Windows.Forms.Button btnLoops;
+        private System.Windows.Forms.Label lblLoops;
+        private System.Windows.Forms.NumericUpDown nmbrLoops;
         private System.Windows.Forms.Button btnClearMacro;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel lblStatus;

@@ -9,6 +9,9 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\RabidWombat.Hooks\RabidWombat.Hooks.csproj" />
     <ProjectReference Include="..\RabidWombat.Simulation\RabidWombat.Simulation.csproj" />
   </ItemGroup>

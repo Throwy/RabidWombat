@@ -1,9 +1,5 @@
-﻿using System;
-using System.Text;
 using System.Windows;
-using System.Windows.Forms;
 using System.Windows.Input;
-using System.Xml;
 
 namespace RabidWombat.Macro.Events.Mouse
 {
@@ -20,48 +16,9 @@ namespace RabidWombat.Macro.Events.Mouse
         /// <summary>
         /// Initializes a new instance of a macro mouse up event.
         /// </summary>
-        /// <param name="location"></param>
-        /// <param name="button"></param>
         public MacroMouseUpEvent(Point location, MouseButton button) : base(location)
         {
             this.Button = button;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of a macro mouse up event.
-        /// </summary>
-        /// <param name="element">The serialized XML element to instialize from.</param>
-        public MacroMouseUpEvent(XmlElement element) : base(new Point(0, 0))
-        {
-            foreach (XmlElement e in element)
-            {
-                switch (e.Name)
-                {
-                    case "Location":
-                        Location = Point.Parse(e.InnerText);
-                        break;
-                    case "Button":
-                        Button = (MouseButton)Enum.Parse(typeof(MouseButton), e.InnerText);
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Serializes this object to an XML string for saving.
-        /// </summary>
-        /// <returns></returns>
-        public override string ToXML()
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine("<MacroMouseUpEvent>");
-            sb.AppendLine("<Location>" + Location.ToString() + "</Location>");
-            sb.AppendLine("<Button>" + Button.ToString() + "</Button>");
-            sb.AppendLine("</MacroMouseUpEvent>");
-
-            return sb.ToString();
         }
     }
 }

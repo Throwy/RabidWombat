@@ -57,7 +57,7 @@ namespace RabidWombat.Macro
             }
             set
             {
-                repetitions = (value == 0 ? 1 : value);
+                repetitions = value == 0 ? 1 : value;
             }
         }
 
@@ -100,8 +100,8 @@ namespace RabidWombat.Macro
         /// <param name="point">The point to convert.</param>
         private Point ConvertPointToAbsolute(Point point)
         {
-            return new Point((Convert.ToDouble(65535) * point.X) / Convert.ToDouble(Screen.PrimaryScreen.Bounds.Width),
-                (Convert.ToDouble(65535) * point.Y) / Convert.ToDouble(Screen.PrimaryScreen.Bounds.Height));
+            return new Point(Convert.ToDouble(65535) * point.X / Convert.ToDouble(Screen.PrimaryScreen.Bounds.Width),
+                Convert.ToDouble(65535) * point.Y / Convert.ToDouble(Screen.PrimaryScreen.Bounds.Height));
         }
 
         /// <summary>

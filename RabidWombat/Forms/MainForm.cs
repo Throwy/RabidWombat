@@ -206,13 +206,9 @@ namespace RabidWombat.Forms
             }
         }
 
-        private void btnLoops_Click(object sender, EventArgs e)
+        private void nmbrLoops_ValueChanged(object sender, EventArgs e)
         {
-            var dialog = new LoopsDialog { Loops = _player.Repetitions };
-            if (dialog.ShowDialog() == DialogResult.OK)
-            {
-                _player.Repetitions = dialog.Loops;
-            }
+            _player.Repetitions = (int)nmbrLoops.Value;
         }
 
         private void btnClearMacro_Click(object sender, EventArgs e)

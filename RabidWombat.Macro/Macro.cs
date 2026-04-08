@@ -1,9 +1,8 @@
-﻿using RabidWombat.Macro.Events;
-using RabidWombat.Macro.Events.Keyboard;
-using RabidWombat.Macro.Events.Mouse;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using RabidWombat.Macro.Events;
 using System.Collections.Generic;
-using System.Text;
-using System.Xml;
+using System.IO;
 
 namespace RabidWombat.Macro
 {
@@ -12,9 +11,13 @@ namespace RabidWombat.Macro
     /// </summary>
     public class Macro
     {
-        /// <summary>
-        /// Holds the list of events for tis macro.
-        /// </summary>
+        private static readonly JsonSerializerSettings JsonSettings = new JsonSerializerSettings
+        {
+            TypeNameHandling = TypeNameHandling.Auto,
+            Converters = { new StringEnumConverter() },
+            Formatting = Formatting.Indented
+        };
+
         private List<MacroEvent> events;
 
         /// <summary>
@@ -36,7 +39,6 @@ namespace RabidWombat.Macro
         /// <summary>
         /// Adds a new event to the end of this macro.
         /// </summary>
-        /// <param name="newEvent">The event to add.</param>
         public void AddEvent(MacroEvent newEvent)
         {
             events.Add(newEvent);
@@ -51,73 +53,22 @@ namespace RabidWombat.Macro
         }
 
         /// <summary>
-        /// Serializes this object to an XML string for saving.
-        /// </summary>
-        /// <returns></returns>
-        public string ToXML()
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine("<RabidWombatMacro>");
-            foreach (MacroEvent e in events)
-            {
-                sb.AppendLine(e.ToXML());
-            }
-            sb.AppendLine("</RabidWombatMacro>");
-
-            return sb.ToString();
-        }
-
-        /// <summary>
         /// Saves this macro to a file at the specified path.
         /// </summary>
-        /// <param name="path">The path to save the file.</param>
         public void Save(string path)
         {
-            XmlDocument doc = new XmlDocument();
-            doc.LoadXml(ToXML());
-            doc.Save(path);
+            string json = JsonConvert.SerializeObject(events, JsonSettings);
+            File.WriteAllText(path, json);
         }
 
         /// <summary>
         /// Loads the macro file at the specified path into this object.
         /// </summary>
-        /// <param name="path">The path to load the macro from.</param>
         public void Load(string path)
         {
             ClearEvents();
-
-            XmlDocument doc = new XmlDocument();
-            doc.Load(path);
-
-            foreach (XmlElement element in doc.DocumentElement)
-            {
-                switch (element.Name)
-                {
-                    case "MacroKeyDownEvent":
-                        AddEvent(new MacroKeyDownEvent(element));
-                        break;
-                    case "MacroKeyUpEvent":
-                        AddEvent(new MacroKeyUpEvent(element));
-                        break;
-                    case "MacroMouseDownEvent":
-                        AddEvent(new MacroMouseDownEvent(element));
-                        break;
-                    case "MacroMouseUpEvent":
-                        AddEvent(new MacroMouseUpEvent(element));
-                        break;
-                    case "MacroMouseMoveEvent":
-                        AddEvent(new MacroMouseMoveEvent(element));
-                        break;
-                    case "MacroMouseWheelEvent":
-                        AddEvent(new MacroMouseWheelEvent(element));
-                        break;
-                    case "MacroDelayEvent":
-                        AddEvent(new MacroDelayEvent(element));
-                        break;
-                    default:
-                        break;
-                }
-            }
+            string json = File.ReadAllText(path);
+            events = JsonConvert.DeserializeObject<List<MacroEvent>>(json, JsonSettings);
         }
     }
 }
