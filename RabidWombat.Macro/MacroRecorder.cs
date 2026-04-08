@@ -23,6 +23,16 @@ namespace RabidWombat.Macro
         private long lastEventTime;
 
         /// <summary>
+        /// Holds the last recorded mouse position for move interpolation.
+        /// </summary>
+        private System.Windows.Point lastMouseMovePoint;
+
+        /// <summary>
+        /// Gets or sets the minimum pixel distance the mouse must travel before a move event is recorded.
+        /// </summary>
+        public double MouseMoveThreshold { get; set; } = 10.0;
+
+        /// <summary>
         /// Gets the macro currently being recorded.
         /// </summary>
         public Macro CurrentMacro { get; private set; }
@@ -92,6 +102,7 @@ namespace RabidWombat.Macro
                 Clear();
             }
             lastEventTime = DateTime.Now.Ticks;
+            lastMouseMovePoint = default;
             IsRecording = true;
         }
 
@@ -143,8 +154,14 @@ namespace RabidWombat.Macro
         {
             if (IsRecording)
             {
-                AddDelayEvent();
-                CurrentMacro.AddEvent(new MacroMouseMoveEvent(e.Point));
+                double dx = e.Point.X - lastMouseMovePoint.X;
+                double dy = e.Point.Y - lastMouseMovePoint.Y;
+                if (dx * dx + dy * dy >= MouseMoveThreshold * MouseMoveThreshold)
+                {
+                    AddDelayEvent();
+                    CurrentMacro.AddEvent(new MacroMouseMoveEvent(e.Point));
+                    lastMouseMovePoint = e.Point;
+                }
             }
         }
 
