@@ -1,4 +1,7 @@
 ﻿using RabidWombat.Macro;
+using RabidWombat.Macro.Events;
+using RabidWombat.Macro.Events.Keyboard;
+using RabidWombat.Macro.Events.Mouse;
 using RabidWombat.Models;
 using System;
 using System.IO;
@@ -120,6 +123,7 @@ namespace RabidWombat.Forms
                 if (result == DialogResult.Yes)
                 {
                     _recorder.Clear();
+                    RefreshMacroDisplay();
                 }
                 else if (result == DialogResult.Cancel)
                 {
@@ -137,6 +141,7 @@ namespace RabidWombat.Forms
             // stop recording
             _recorder.StopRecording();
             lblStatus.Text = "Recording finished.";
+            RefreshMacroDisplay();
         }
 
         private void btnPlayMacro_Click(object sender, EventArgs e)
@@ -203,6 +208,7 @@ namespace RabidWombat.Forms
                 var loadedMacro = new Macro.Macro();
                 loadedMacro.Load(dialog.FileName);
                 _recorder.LoadMacro(loadedMacro);
+                RefreshMacroDisplay();
             }
         }
 
@@ -221,6 +227,64 @@ namespace RabidWombat.Forms
             _player.MouseJitter = (int)nmbrMouseJitter.Value;
         }
 
+        private void RefreshMacroDisplay()
+        {
+            lstEvents.Items.Clear();
+
+            var macro = _recorder.CurrentMacro;
+            if (macro == null || macro.Events == null || macro.Events.Length == 0)
+            {
+                lblMacroInfo.Text = "Macro Events (0):";
+                return;
+            }
+
+            var events = macro.Events;
+            lblMacroInfo.Text = $"Macro Events ({events.Length}):";
+
+            lstEvents.BeginUpdate();
+            foreach (var evt in events)
+            {
+                string type, detail;
+                switch (evt)
+                {
+                    case MacroDelayEvent delay:
+                        type = "Delay";
+                        detail = $"{TimeSpan.FromTicks(delay.Delay).TotalMilliseconds:F0}ms";
+                        break;
+                    case MacroKeyDownEvent kd:
+                        type = "Key Down";
+                        detail = ((Keys)kd.VirtualKeyCode).ToString();
+                        break;
+                    case MacroKeyUpEvent ku:
+                        type = "Key Up";
+                        detail = ((Keys)ku.VirtualKeyCode).ToString();
+                        break;
+                    case MacroMouseMoveEvent mm:
+                        type = "Mouse Move";
+                        detail = $"({mm.Location.X:F0}, {mm.Location.Y:F0})";
+                        break;
+                    case MacroMouseDownEvent md:
+                        type = "Mouse Down";
+                        detail = $"{md.Button} at ({md.Location.X:F0}, {md.Location.Y:F0})";
+                        break;
+                    case MacroMouseUpEvent mu:
+                        type = "Mouse Up";
+                        detail = $"{mu.Button} at ({mu.Location.X:F0}, {mu.Location.Y:F0})";
+                        break;
+                    case MacroMouseWheelEvent mw:
+                        type = "Mouse Wheel";
+                        detail = $"delta={mw.Delta} at ({mw.Location.X:F0}, {mw.Location.Y:F0})";
+                        break;
+                    default:
+                        type = evt.GetType().Name;
+                        detail = "";
+                        break;
+                }
+                lstEvents.Items.Add(new ListViewItem(new[] { type, detail }));
+            }
+            lstEvents.EndUpdate();
+        }
+
         private void btnClearMacro_Click(object sender, EventArgs e)
         {
             // confirm action
@@ -231,6 +295,7 @@ namespace RabidWombat.Forms
                 {
                     lblStatus.Text = "Macro Cleared. Ready...";
                     _recorder.Clear();
+                    RefreshMacroDisplay();
                 }
             }
         }

@@ -41,6 +41,10 @@
             this.nmbrDelayJitter = new System.Windows.Forms.NumericUpDown();
             this.lblMouseJitter = new System.Windows.Forms.Label();
             this.nmbrMouseJitter = new System.Windows.Forms.NumericUpDown();
+            this.lblMacroInfo = new System.Windows.Forms.Label();
+            this.lstEvents = new System.Windows.Forms.ListView();
+            this.colEventType = new System.Windows.Forms.ColumnHeader();
+            this.colEventDetail = new System.Windows.Forms.ColumnHeader();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.nmbrLoops)).BeginInit();
@@ -176,11 +180,43 @@
             this.nmbrMouseJitter.Value = new decimal(new int[] { 0, 0, 0, 0 });
             this.nmbrMouseJitter.ValueChanged += new System.EventHandler(this.nmbrMouseJitter_ValueChanged);
             //
+            // lblMacroInfo
+            //
+            this.lblMacroInfo.AutoSize = true;
+            this.lblMacroInfo.Location = new System.Drawing.Point(12, 244);
+            this.lblMacroInfo.Name = "lblMacroInfo";
+            this.lblMacroInfo.TabIndex = 13;
+            this.lblMacroInfo.Text = "Macro Events (0):";
+            //
+            // lstEvents
+            //
+            this.lstEvents.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.colEventType,
+            this.colEventDetail});
+            this.lstEvents.FullRowSelect = true;
+            this.lstEvents.GridLines = true;
+            this.lstEvents.Location = new System.Drawing.Point(12, 262);
+            this.lstEvents.Name = "lstEvents";
+            this.lstEvents.Size = new System.Drawing.Size(186, 130);
+            this.lstEvents.TabIndex = 14;
+            this.lstEvents.UseCompatibleStateImageBehavior = false;
+            this.lstEvents.View = System.Windows.Forms.View.Details;
+            //
+            // colEventType
+            //
+            this.colEventType.Text = "Type";
+            this.colEventType.Width = 90;
+            //
+            // colEventDetail
+            //
+            this.colEventDetail.Text = "Detail";
+            this.colEventDetail.Width = 92;
+            //
             // statusStrip1
             //
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblStatus});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 241);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 396);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(210, 22);
             this.statusStrip1.SizingGrip = false;
@@ -196,8 +232,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(210, 263);
+            this.ClientSize = new System.Drawing.Size(210, 418);
             this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.lstEvents);
+            this.Controls.Add(this.lblMacroInfo);
             this.Controls.Add(this.nmbrMouseJitter);
             this.Controls.Add(this.lblMouseJitter);
             this.Controls.Add(this.nmbrDelayJitter);
@@ -245,6 +283,10 @@
         private System.Windows.Forms.NumericUpDown nmbrMouseJitter;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel lblStatus;
+        private System.Windows.Forms.Label lblMacroInfo;
+        private System.Windows.Forms.ListView lstEvents;
+        private System.Windows.Forms.ColumnHeader colEventType;
+        private System.Windows.Forms.ColumnHeader colEventDetail;
     }
 }
 
