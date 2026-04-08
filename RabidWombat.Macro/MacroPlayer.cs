@@ -166,6 +166,9 @@ namespace RabidWombat.Macro
 
             for (int i = 0; i < Repetitions; i++)
             {
+                long referenceTicks = DateTime.Now.Ticks;
+                long expectedElapsedTicks = 0;
+
                 foreach (MacroEvent current in CurrentMacro.Events)
                 {
                     if (cancelled)
@@ -175,11 +178,15 @@ namespace RabidWombat.Macro
                         break;
                     }
 
-                    // delay event
+                    // delay event — sleep only the time remaining after accounting for execution overhead
                     if (current is MacroDelayEvent delayEvent)
                     {
                         int jitterMs = DelayJitter > 0 ? _random.Next(0, DelayJitter + 1) : 0;
-                        Thread.Sleep(new TimeSpan(delayEvent.Delay) + TimeSpan.FromMilliseconds(jitterMs));
+                        expectedElapsedTicks += delayEvent.Delay + TimeSpan.FromMilliseconds(jitterMs).Ticks;
+                        long actualElapsedTicks = DateTime.Now.Ticks - referenceTicks;
+                        long remainingTicks = expectedElapsedTicks - actualElapsedTicks;
+                        if (remainingTicks > 0)
+                            Thread.Sleep(new TimeSpan(remainingTicks));
                     }
                     // mouse move event — move directly since recorded points already form the path
                     else if (current is MacroMouseMoveEvent mouseMoveEvent)
